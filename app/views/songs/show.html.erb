@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @song.title %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @song.text %>
+</p>
+
+<p>
+  <strong>Tag:</strong>
+  <%= @song.tag %>
+</p>
+
+<p>
+  <strong>Chordbook:</strong>
+  <%= @song.chordbook %>
+</p>
+
+<%= link_to 'Edit', edit_song_path(@song) %> |
+<%= link_to 'Back', songs_path %>
+<%= link_to 'Delete', @song, method: :delete, data: { confirm: 'Are you sure you wanna delete '+ @song.title + ' ?' }, class: "btn btn-danger" %>
