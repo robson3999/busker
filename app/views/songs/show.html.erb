@@ -1,25 +1,23 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
+<h1>
   <%= @song.title %>
-</p>
-
-<p>
-  <strong>Text:</strong>
-  <%= @song.text %>
-</p>
-
+</h1>
 <p>
   <strong>Author:</strong>
   <%= @song.author %>
 </p>
 
 <p>
-  <strong>Book no:</strong>
-  <%= @song.book_id %>
+  <%= simple_format(@song.text) %>
 </p>
 
+
+<!-- <p>
+  <strong>Book no:</strong>
+  <%= @song.book_id %>
+</p> -->
+
 <%= link_to 'Edit', edit_song_path(@song) %> |
-<%= link_to 'Back', songs_path %>
-<%= link_to 'Delete', @song, method: :delete, data: { confirm: 'Are you sure you wanna delete '+ @song.title + ' ?' }, class: "btn btn-danger" %>
+<%= link_to 'Back', songs_path %> |
+<%= link_to 'Delete', @song, method: :delete, data: { confirm: 'Are you sure you wanna delete '+ @song.title + ' ?' } %>
