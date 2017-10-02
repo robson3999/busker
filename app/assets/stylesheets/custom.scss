@@ -2,10 +2,17 @@ $teal-color: #42f4c2;
 $red-color: #f44174;
 
 .busker_logo{
-  color: $teal-color;
+  color: $red-color;
+}
+.navbar{
+  font-size: 1.5em;
+}
+ .navbar-brand{
+   color: $red-color!important;
+   font-size: 1.9em!important;
 }
 
- .navbar-header{
-   color: #fff;
-   font-weight: 700;
+footer{
+  position: fixed;
+  bottom: 0;
 }
