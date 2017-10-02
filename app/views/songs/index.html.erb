@@ -9,10 +9,9 @@
 
     <% @songs.each do |song| %>
         <h2><%= link_to "#{song.title}", song %></h2>
-        <p>Tags:</p>
-        <p>
-          <%= song.tag %>
+        <p>Author: <%= song.author %>
         </p>
+        <hr>
     <% end %>
   </div>
 <br>
