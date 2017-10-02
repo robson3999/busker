@@ -1,1 +1,27 @@
+<br>
+<div class="row">
 <h1>Hello at <span class="busker_logo">Busker</span>!</h1>
+<hr>
+</div>
+<div class="row">
+  <h3>Search</h3>
+  <%= form_tag(songs_path, method: :get) do %>
+    <%= text_field_tag :term, params[:term] %>
+    <%= submit_tag 'Search', name:nil %>
+  <% end %>
+</div>
+<br>
+<div class="row">
+
+<h2>Newest songs:</h2>
+</div>
+
+<div class="row">
+
+    <% @songs.each do |song| %>
+        <h2><%= link_to "#{song.title}", song %></h2>
+        <p>Author: <%= song.author %>
+        </p>
+        <hr>
+    <% end %>
+  </div>

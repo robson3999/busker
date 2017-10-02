@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   # GET /
   def index
-
+    @songs = Song.last(3)
   end
 
 end

@@ -1,14 +1,28 @@
+<div class="row">
+
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
-  <%= @book.title %>
+  <h1>
+    <%= @book.title %>
+  </h1>
 </p>
 
-<p>
-  <strong>Description:</strong>
+<h4>
   <%= @book.description %>
-</p>
+</h4>
 
 <%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
+<%= link_to 'Back', books_path %> |
+<td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<hr>
+</div>
+<div class="row">
+<h3>Songs in that chordbook:</h3>
+</div>
+<% @book.songs.each do |song| %>
+  <div class="row">
+    <h4><%= link_to song.title, song %></h4>
+    <p><%= song.author %></p>
+  </div>
+  <% end %>
