@@ -10,9 +10,16 @@ class SongsController < ApplicationController
     else
       @songs = Song.all
     end
-    if params[:add_song_to_book].present? && session[:book_id].present?
-      @book.songs << Song.find(params[:add_song_to_book])
-    end
+    # Trying to implement prevention from adding multiple times the same song to book
+    # if params[:add_song_to_book].present? && session[:book_id].present?
+    #   # if @book.songs.first.present?
+    #   #   if @book.songs.first[:id] == params[:add_song_to_book]
+    #   #     format.html {redirect_to @songs, notice: "Song is already in your book"}
+    #   #   end
+    #   # else
+    #   #   @book.songs << Song.find(params[:add_song_to_book])
+    #   # end
+    # end
   end
 
 
