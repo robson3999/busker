@@ -16,14 +16,14 @@
       </li>
       <% if current_user %>
       <li>
-        <%= link_to 'Chordbooks', books_path, :class => "nav-link" %>
+        <%= link_to 'Songbooks', books_path, :class => "nav-link" %>
       </li>
       <li>
       <%= link_to "Logout", destroy_user_session_path, :method => "delete" %>
       </li>
         <% else %>
         <li>
-          <%= link_to 'Chordbooks', "#", :class => "nav-link", :id => "chordbook" %>
+          <%= link_to 'Songbooks', "#", :class => "nav-link", :id => "chordbook" %>
         </li>
       <li>
         <%= link_to "Sing in", new_user_session_path %>

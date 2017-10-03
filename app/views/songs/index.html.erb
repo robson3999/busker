@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<% provide :page_title, "Songs list" %>
 <div class="row">
   <div class="col-lg-6 col-xs-12">
     <h1>Songs</h1>
@@ -24,7 +24,7 @@
 
   <% @songs.each do |song| %>
   <h3><%= link_to "#{song.title}", song %></h3>
-  <% if current_user %>
+  <% if current_user && session[:book_id] %>
   <%= link_to "To my songbook!", songs_path(:add_song_to_book => song.id), :class => "btn btn-sm btn-default" %>
   <% end %>
   <p>Author: <%= song.author %>

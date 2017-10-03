@@ -26,7 +26,7 @@
     <%= form.text_field :author, id: :song_author, :class => "form-control" %>
   </div>
 
-  <% if current_user %>
+  <% if current_user && session[:book_id] %>
     <div class="form-group">
         <%= form.label :book_id %>
         <%= form.collection_select(:book_id, @book, :id, :title, :class => "form-control")%>

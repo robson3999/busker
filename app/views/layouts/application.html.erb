@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Busker</title>
+    <title><%= yield :page_title %> | Busker</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,7 +9,6 @@
   </head>
 
   <body>
-
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-lg-2">
