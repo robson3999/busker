@@ -7,17 +7,11 @@
   <strong>Author:</strong>
   <%= @song.author %>
 </p>
-
+<% if current_user %>
+<%= link_to 'Edit', edit_song_path(@song), :class => "btn btn-sm btn-default" %>
+<%= link_to 'Back', songs_path, :class => "btn btn-sm btn-default" %>
+<%= link_to 'Delete', @song, method: :delete, data: { confirm: 'Are you sure you wanna delete '+ @song.title + ' ?' }, :class => "btn btn-sm btn-default" %>
+<% end %>
 <p>
   <%= simple_format(@song.text) %>
 </p>
-
-
-<!-- <p>
-  <strong>Book no:</strong>
-  <%= @song.book_id %>
-</p> -->
-
-<%= link_to 'Edit', edit_song_path(@song) %> |
-<%= link_to 'Back', songs_path %> |
-<%= link_to 'Delete', @song, method: :delete, data: { confirm: 'Are you sure you wanna delete '+ @song.title + ' ?' } %>

@@ -4,8 +4,17 @@ class SongsController < ApplicationController
   # GET /songs
   # GET /songs.json
   def index
-    @songs = Song.search(params[:term])
+    @book = Book.find_by_id(session[:book_id])
+    if params[:term]
+      @songs = Song.search(params[:term])
+    else
+      @songs = Song.all
+    end
+    if params[:add_song_to_book].present? && session[:book_id].present?
+      @book.songs << Song.find(params[:add_song_to_book])
+    end
   end
+
 
   # GET /songs/1
   # GET /songs/1.json
@@ -16,6 +25,7 @@ class SongsController < ApplicationController
   # GET /songs/new
   def new
     @song = Song.new
+    @book = Book.where("user_id LIKE ?", current_user)
   end
 
   # GET /songs/1/edit
@@ -26,7 +36,6 @@ class SongsController < ApplicationController
   # POST /songs.json
   def create
     @song = Song.new(song_params)
-    # debugger
     respond_to do |format|
       if @song.save
         format.html { redirect_to @song, notice: 'Song was successfully created.' }

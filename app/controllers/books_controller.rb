@@ -4,12 +4,15 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    user_id = current_user.id if current_user
+    @books = Book.where("user_id LIKE ?", user_id)
   end
 
   # GET /books/1
   # GET /books/1.json
   def show
+    @books = Book.find(params[:id])
+    session[:book_id] = params[:id]
   end
 
   # GET /books/new
@@ -25,7 +28,7 @@ class BooksController < ApplicationController
   # POST /books.json
   def create
     @book = Book.new(book_params)
-
+    @book.user_id = current_user.id if current_user
     respond_to do |format|
       if @book.save
         format.html { redirect_to @book, notice: 'Book was successfully created.' }

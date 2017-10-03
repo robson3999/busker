@@ -1,17 +1,36 @@
 <p id="notice"><%= notice %></p>
 <div class="row">
-  <h1>Songs</h1>
-  <h2>manage all songs</h2>
-  <%= link_to 'New Song', new_song_path %>
+  <div class="col-lg-6 col-xs-12">
+    <h1>Songs</h1>
+    <%= link_to 'Add new Song', new_song_path, :class => "btn btn-sm btn-default" %>
+    <% if session[:book_id] %>
+    <%= link_to "Chordbook", book_path(:id => session[:book_id]), :class => "btn btn-sm btn-success" %>
+    <% end %>
+  </div>
+  <div class="col-lg-6 col-xs-12">
+    <h1></h1>
+    <%= form_tag(songs_path, method: :get) do %>
+    <%= text_field_tag :term, params[:term] %>
+    <%= submit_tag 'Search', name:nil %>
+    <% end %>
+    <div>
+  </div>
+
+  </div>
 </div>
 <hr>
 <div class="row">
+<div class="col">
 
-    <% @songs.each do |song| %>
-        <h2><%= link_to "#{song.title}", song %></h2>
-        <p>Author: <%= song.author %>
-        </p>
-        <hr>
-    <% end %>
-  </div>
+  <% @songs.each do |song| %>
+  <h3><%= link_to "#{song.title}", song %></h3>
+  <% if current_user %>
+  <%= link_to "To my songbook!", songs_path(:add_song_to_book => song.id), :class => "btn btn-sm btn-default" %>
+  <% end %>
+  <p>Author: <%= song.author %>
+  </p>
+  <hr>
+  <% end %>
+</div>
+</div>
 <br>

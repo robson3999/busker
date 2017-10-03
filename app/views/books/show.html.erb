@@ -12,13 +12,14 @@
   <%= @book.description %>
 </h4>
 
-<%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %> |
-<td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<%= link_to 'Edit', edit_book_path(@book), :class => "btn btn-sm btn-default" %>
+<%= link_to 'Back', books_path, :class => "btn btn-sm btn-default" %>
+<td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-sm btn-warning" %></td>
 <hr>
 </div>
 <div class="row">
 <h3>Songs in that chordbook:</h3>
+<%= link_to "Add songs", songs_path , :class => "btn btn-sm btn-default" %>
 </div>
 <% @book.songs.each do |song| %>
   <div class="row">
