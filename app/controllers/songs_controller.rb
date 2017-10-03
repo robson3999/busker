@@ -25,11 +25,12 @@ class SongsController < ApplicationController
   # GET /songs/new
   def new
     @song = Song.new
-    @book = Book.where("user_id LIKE ?", current_user)
+    @book = Book.where("'user_id' LIKE '?'", current_user)
   end
 
   # GET /songs/1/edit
   def edit
+    @book = Book.where("'user_id' LIKE '?'", current_user)
   end
 
   # POST /songs
