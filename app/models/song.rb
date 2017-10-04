@@ -1,7 +1,7 @@
 class Song < ApplicationRecord
   has_and_belongs_to_many :books
   validates :title, :author, length: {maximum: 45 }
-  validates :title, :text, :author, presence: true
+  validates :title, :author, presence: true
 
   def self.search(term)
     if term

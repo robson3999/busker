@@ -1,7 +1,9 @@
 <% provide :page_title, "Songs list" %>
   <div class="col-xs-12">
     <h1>Songs</h1>
+    <% if current_user.try(:admin?) %>
     <%= link_to 'Add new Song', new_song_path, :class => "btn btn-sm btn-info" %>
+    <% end %>
     <% if session[:book_id] %>
     <%= link_to "#{@book.title}", book_path(:id => session[:book_id]), :class => "btn btn-sm btn-default" %>
     <% end %>
