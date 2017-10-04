@@ -1,15 +1,14 @@
 <% provide :page_title, "Songbooks" %>
-<p id="notice"><%= notice %></p>
-<div class="row">
+
+<div class="col-md-12">
   <h1>Songbooks</h1>
   <%= link_to 'New Book', new_book_path, :class => "btn btn-sm btn-default" %>
+  <hr>
 </div>
-<hr>
 
 <% @books.each do |book| %>
-<div class="row">
-  <h2><%= book.title %></h2>
+<div class="col-md-12">
+  <h2><%= link_to "#{book.title}", book %></h2>
   <h4><%= book.description %></h4>
-  <td><%= link_to 'Show', book, :class => "btn btn-sm btn-default" %></td>
 </div>
 <% end %>

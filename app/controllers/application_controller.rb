@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
     @songs = Song.last(3)
   end
 
+  # GET /about
+  def about
+  end
+
 end

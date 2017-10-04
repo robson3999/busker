@@ -9,4 +9,14 @@ class Song < ApplicationRecord
     end
   end
 
+  def self.is_already_added?(not_added_songs, song_id)
+    if not_added_songs
+      not_added_songs.each do |song|
+        if song.id == song_id
+          return false
+        end
+      end
+    end
+  end
+
 end

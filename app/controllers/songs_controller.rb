@@ -5,21 +5,20 @@ class SongsController < ApplicationController
   # GET /songs.json
   def index
     @book = Book.find_by_id(session[:book_id])
+    if @book != nil
+      added_songs = @book.songs
+    	all_songs = Song.all
+    	@not_added_songs = all_songs - added_songs
+    end
     if params[:term]
       @songs = Song.search(params[:term])
     else
       @songs = Song.all
     end
-    # Trying to implement prevention from adding multiple times the same song to book
-    # if params[:add_song_to_book].present? && session[:book_id].present?
-    #   # if @book.songs.first.present?
-    #   #   if @book.songs.first[:id] == params[:add_song_to_book]
-    #   #     format.html {redirect_to @songs, notice: "Song is already in your book"}
-    #   #   end
-    #   # else
-    #   #   @book.songs << Song.find(params[:add_song_to_book])
-    #   # end
-    # end
+    if params[:add_song_to_book].present? && session[:book_id].present?
+        @book.songs << Song.find(params[:add_song_to_book])
+        redirect_to "/songs"
+    end
   end
 
 

@@ -11,8 +11,13 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
-    @books = Book.find(params[:id])
+    @book = Book.find(params[:id])
     session[:book_id] = params[:id]
+
+    if params[:remove_song_from_book].present?
+      song = Song.find_by_id(params[:remove_song_from_book])
+      song.books.delete(@book)
+    end
   end
 
   # GET /books/new
@@ -57,6 +62,7 @@ class BooksController < ApplicationController
   # DELETE /books/1
   # DELETE /books/1.json
   def destroy
+    session[:book_id] = nil
     @book.destroy
     respond_to do |format|
       format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }

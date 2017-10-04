@@ -10,6 +10,12 @@
     <%= link_to 'Busker 🎸', root_path, :class => "navbar-brand" %>
   </div>
   <div class="collapse navbar-collapse">
+  <%= form_tag(songs_path, method: :get, class: "form-inline search-field") do %>
+  <div class="form-group">
+    <%= text_field_tag :term, params[:term], :class => "form-control" %>
+    <%= submit_tag 'Search', class: "btn btn-sm" %>
+  </div>
+  <% end %>
     <ul class="nav navbar-nav">
       <li class="">
         <%= link_to 'Songs', songs_path, :class => "nav-link" %>
@@ -22,13 +28,15 @@
       <%= link_to "Logout", destroy_user_session_path, :method => "delete" %>
       </li>
         <% else %>
-        <li>
-          <%= link_to 'Songbooks', "#", :class => "nav-link", :id => "chordbook" %>
-        </li>
+      <li>
+        <%= link_to 'Songbooks', "#", :class => "nav-link", :id => "chordbook" %>
+      </li>
       <li>
         <%= link_to "Sing in", new_user_session_path %>
       </li>
       <% end %>
+      <li>
+        <%= link_to "About", about_path %>
       </li>
     </ul>
   </div>

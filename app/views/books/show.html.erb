@@ -1,9 +1,5 @@
 <% provide :page_title, @book.title %>
-
 <div class="row">
-
-<p id="notice"><%= notice %></p>
-
 <p>
   <h1>
     <%= @book.title %>
@@ -23,9 +19,10 @@
 <h3>Songs in that chordbook:</h3>
 <%= link_to "Add songs", songs_path , :class => "btn btn-sm btn-default" %>
 </div>
-<% @book.songs.each do |song| %>
+<% @book.songs.reverse.each do |song| %>
   <div class="row">
     <h4><%= link_to song.title, song %></h4>
+    <%= link_to "Remove from songbook", book_path(:remove_song_from_book => song.id), :class => "btn btn-sm btn-warning" %>
     <p><%= song.author %></p>
   </div>
   <% end %>
