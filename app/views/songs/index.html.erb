@@ -1,9 +1,9 @@
 <% provide :page_title, "Songs list" %>
   <div class="col-xs-12">
     <h1>Songs</h1>
-    <%= link_to 'Add new Song', new_song_path, :class => "btn btn-sm btn-default" %>
+    <%= link_to 'Add new Song', new_song_path, :class => "btn btn-sm btn-info" %>
     <% if session[:book_id] %>
-    <%= link_to "#{@book.title}", book_path(:id => session[:book_id]), :class => "btn btn-sm btn-success" %>
+    <%= link_to "#{@book.title}", book_path(:id => session[:book_id]), :class => "btn btn-sm btn-default" %>
     <% end %>
     <hr>
   </div>
@@ -11,10 +11,11 @@
 
   <div class="col-md-12">
   <% @songs.each do |song| %>
-    <h3><%= link_to "#{song.title}", song %></h3>
+    <h3><%= link_to "#{song.title}", song %>
     <% if current_user && !Song.is_already_added?(@not_added_songs, song.id) && session[:book_id] %>
-        <%= link_to "To my songbook!", songs_path(:add_song_to_book => song.id), :class => "btn btn-sm btn-default" %>
+        <%= link_to "To my songbook!", songs_path(:add_song_to_book => song.id), :class => "btn btn-sm btn-info" %>
     <% end %>
+    </h3>
     <p>Author: <%= song.author %>
   </p>
   <% end %>

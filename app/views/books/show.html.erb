@@ -10,19 +10,23 @@
   <%= @book.description %>
 </h4>
 
+<%= link_to "Add songs", songs_path , :class => "btn btn-sm btn-info" %>
+<%= link_to 'Delete', @book, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-sm btn-danger" %>
 <%= link_to 'Edit', edit_book_path(@book), :class => "btn btn-sm btn-default" %>
 <%= link_to 'Back', books_path, :class => "btn btn-sm btn-default" %>
-<td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-sm btn-warning" %></td>
 <hr>
 </div>
 <div class="row">
 <h3>Songs in that chordbook:</h3>
-<%= link_to "Add songs", songs_path , :class => "btn btn-sm btn-default" %>
 </div>
 <% @book.songs.reverse.each do |song| %>
   <div class="row">
-    <h4><%= link_to song.title, song %></h4>
-    <%= link_to "Remove from songbook", book_path(:remove_song_from_book => song.id), :class => "btn btn-sm btn-warning" %>
-    <p><%= song.author %></p>
+    <h4><%= link_to song.title, song %>
+      <%= link_to "Remove", book_path(:remove_song_from_book => song.id), :class => "btn btn-sm btn-warning" %>
+    </h4>
+    <p>
+      Author:
+      <%= song.author %>
+    </p>
   </div>
-  <% end %>
+<% end %>
