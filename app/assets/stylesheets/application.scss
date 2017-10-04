@@ -12,7 +12,7 @@
  *
  */
  // Custom bootstrap variables must be set or imported *before* bootstrap.
+@import "custom";
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "navbar-fixed-side";
-@import "custom"
+@import "freelancer";

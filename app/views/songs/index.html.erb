@@ -1,6 +1,17 @@
-<% provide :page_title, "Songs list" %>
-  <div class="col-xs-12">
+<% provide :page_title, "Songs" %>
+  <div class="col-lg-6 col-xs-12">
     <h1>Songs</h1>
+  </div>
+  <div class="col-lg-6 col-xs-12">
+    <br>
+    <%= form_tag(songs_path, method: :get, class: "form-inline search-field") do %>
+    <div class="form-group">
+      <%= text_field_tag :term, params[:term], :class => "form-control" %>
+      <%= submit_tag 'Search', class: "btn btn-sm" %>
+    </div>
+    <% end %>
+  </div>
+  <div class="col-xs-12">
     <% if current_user.try(:admin?) %>
     <%= link_to 'Add new Song', new_song_path, :class => "btn btn-sm btn-info" %>
     <% end %>

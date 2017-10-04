@@ -1,30 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= yield :page_title %> | Busker</title>
-    <%= csrf_meta_tags %>
+<head>
+  <title><%= yield :page_title %> | Busker</title>
+  <%= csrf_meta_tags %>
+  <!-- Custom fonts for this template -->
+  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <script src="https://cdn.ckeditor.com/ckeditor5/1.0.0-alpha.1/classic/ckeditor.js"></script>
+</head>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script src="https://cdn.ckeditor.com/ckeditor5/1.0.0-alpha.1/classic/ckeditor.js"></script>
-  </head>
-
-  <body>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-lg-2">
-           <%= render 'layouts/navbar' %>
-        </div>
-        <div class="container">
-          <div class="col-sm-9 col-lg-10">
-              <p class="notice"><%= notice %></p>
-              <p class="alert"><%= alert %></p>
-              <%= yield %>
-          </div>
-        </div>
+<body id="page-top">
+  <%= render 'layouts/navbar' %>
+  <section id="portfolio">
+    <div class="container">
+      <div class="notifications">
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
       </div>
+
+      <%= yield %>
     </div>
-  </body>
-  <script>
-  </script>
+  </section>
+  <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+  <div class="scroll-top page-scroll hidden-sm hidden-xs hidden-lg hidden-md">
+    <a class="btn btn-primary" href="#page-top">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</body>
+<script>
+</script>
 </html>

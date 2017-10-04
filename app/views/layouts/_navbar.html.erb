@@ -1,43 +1,48 @@
- <nav class="navbar navbar-default navbar-fixed-side">
-  <div class="navbar-header">
-    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <!-- <%= image_tag "logo.png", :class => "busker_logo" %> -->
-    <%= link_to 'Busker 🎸', root_path, :class => "navbar-brand" %>
-  </div>
-  <div class="collapse navbar-collapse">
-  <%= form_tag(songs_path, method: :get, class: "form-inline search-field") do %>
-  <div class="form-group">
-    <%= text_field_tag :term, params[:term], :class => "form-control" %>
-    <%= submit_tag 'Search', class: "btn btn-sm" %>
-  </div>
-  <% end %>
-    <ul class="nav navbar-nav">
-      <li class="">
-        <%= link_to 'Songs', songs_path, :class => "nav-link" %>
-      </li>
-      <% if current_user %>
-      <li>
-        <%= link_to 'Songbooks', books_path, :class => "nav-link" %>
-      </li>
-      <li>
-      <%= link_to "Logout", destroy_user_session_path, :method => "delete" %>
-      </li>
-        <% else %>
-      <li>
-        <%= link_to 'Songbooks', "#", :class => "nav-link", :id => "chordbook" %>
-      </li>
-      <li>
-        <%= link_to "Sing in", new_user_session_path %>
-      </li>
-      <% end %>
-      <li>
-        <%= link_to "About", about_path %>
-      </li>
-    </ul>
-  </div>
-</nav>
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <%= link_to 'Busker 🎸', root_path, :class => "navbar-brand js-scroll-trigger" %>
+                <!-- <a class="navbar-brand" href="#page-top">Start Bootstrap</a> -->
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                      <%= link_to 'Songs', songs_path, :class => "nav-link js-scroll-trigger" %>
+                        <!-- <a href="#portfolio">Portfolio</a> -->
+                    </li>
+                    <% if current_user %>
+                    <li class="page-scroll">
+                        <%= link_to 'Songbooks', books_path, :class => "nav-link js-scroll-trigger" %>
+                    </li>
+                    <li class="page-scroll">
+                        <%= link_to "About", about_path, :class => "nav-link js-scroll-trigger" %>
+                    </li>
+                    <li class="page-scroll">
+                        <%= link_to "Logout", destroy_user_session_path, :method => "delete", :class => "nav-link js-scroll-trigger" %>
+                    </li>
+                    <% else %>
+                    <li class="disabled">
+                      <%= link_to 'Songbooks', "#", :class => "nav-link js-scroll-trigger", :id => "chordbook" %>
+                    </li>
+                    <li class="page-scroll">
+                        <%= link_to "About", about_path, :class => "nav-link js-scroll-trigger" %>
+                    </li>
+                    <li class="page-scroll">
+                        <%= link_to "Sing in", new_user_session_path, :class => "nav-link js-scroll-trigger" %>
+                    </li>
+                    <% end %>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
