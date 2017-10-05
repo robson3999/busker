@@ -1,11 +1,12 @@
 class Song < ApplicationRecord
   has_and_belongs_to_many :books
-  validates :title, :author, length: {maximum: 45 }
-  validates :title, :author, presence: true
+  belongs_to :author
+  validates :title, length: {maximum: 45 }
+  validates :title, :author_id, presence: true
 
   def self.search(term)
     if term
-      where('title || author LIKE ?', "%#{term}%")
+      where('title LIKE ?', "%#{term}%")
     else
       all
     end

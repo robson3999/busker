@@ -1,5 +1,5 @@
 <% provide :page_title, @book.title %>
-<div class="row">
+<div class="col-xs-12">
 <p>
   <h1>
     <%= @book.title %>
@@ -17,17 +17,15 @@
 <%= link_to 'Back', books_path, :class => "btn btn-sm btn-default" %>
 <hr>
 </div>
-<div class="row">
-<h3>Songs in that chordbook:</h3>
-</div>
+<div class="col-xs-12">
+<h3>Songs in that songbook:</h3>
 <% @book.songs.reverse.each do |song| %>
-  <div class="row">
+  <div class="col-xs-12">
     <h4><%= link_to song.title, song %>
       <%= link_to "Remove", book_path(:remove_song_from_book => song.id), :class => "btn btn-sm btn-warning" %>
     </h4>
     <p>
-      Author:
-      <%= song.author %>
+      Author: <%= link_to "#{song.author.name}", author_path(song.author.id), :class => "author-link"%>
     </p>
   </div>
 <% end %>

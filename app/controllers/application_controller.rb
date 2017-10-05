@@ -3,11 +3,26 @@ class ApplicationController < ActionController::Base
 
   # GET /
   def index
-    @songs = Song.last(3)
+    @songs = Song.last(3).reverse
   end
 
   # GET /about
   def about
+  end
+
+  def author
+    @author = Author.find_by_id(params[:id])
+    @songs = Song.where("author_id LIKE '?'", @author.id)
+  end
+
+  def authors
+    @authors = []
+    all_authors = Author.all
+    all_authors.each do |author|
+      if !author.songs.empty?
+        @authors << author
+      end
+    end
   end
 
 end

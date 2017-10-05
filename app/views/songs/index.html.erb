@@ -15,6 +15,7 @@
     <% if current_user.try(:admin?) %>
     <%= link_to 'Add new Song', new_song_path, :class => "btn btn-sm btn-info" %>
     <% end %>
+    <%= link_to 'View authors', authors_path, :class => "btn btn-sm btn-info" %>
     <% if session[:book_id] %>
     <%= link_to "#{@book.title}", book_path(:id => session[:book_id]), :class => "btn btn-sm btn-default" %>
     <% end %>
@@ -29,8 +30,7 @@
         <%= link_to "To my songbook!", songs_path(:add_song_to_book => song.id), :class => "btn btn-sm btn-info" %>
     <% end %>
     </h3>
-    <p>Author: <%= song.author %>
-  </p>
+    <p>Author: <%= link_to "#{song.author.name}", author_path(song.author.id), :class => "author-link"%></p>
   <% end %>
   <hr>
 </div>

@@ -6,13 +6,13 @@
     <p>Find songs, save into collections and sing!</p>
   </div>
 <hr>
-<h2>Newest songs:</h2>
+<h2>Newest <%= link_to "songs", songs_path, :id => "songs-link" %>:</h2>
 </div>
 
 <div class="col-xs-12">
     <% @songs.each do |song| %>
         <h3><%= link_to "#{song.title}", song %></h3>
-        <p>Author: <%= song.author %>
+        <p>Author: <%= link_to "#{song.author.name}", author_path(song.author.id), :class => "author-link"%>
         </p>
         <hr>
     <% end %>

@@ -26,6 +26,7 @@ class SongsController < ApplicationController
   # GET /songs/1.json
   def show
     @song = Song.find(params[:id])
+    @author = @song.author
   end
 
   # GET /songs/new
@@ -37,10 +38,22 @@ class SongsController < ApplicationController
   def edit
   end
 
+  # Update params[:author] before creating/updating song
+  def song_params_updated
+    song_params_updated = {}
+    if Author.exists?(:name => song_params[:author])
+      song_params_updated[:author] = Author.find_by_name(song_params[:author])
+    else
+      Author.create(:name => song_params[:author])
+      song_params_updated[:author] = Author.last
+    end
+    song_params.merge(song_params_updated)
+  end
+
   # POST /songs
   # POST /songs.json
   def create
-    @song = Song.new(song_params)
+    @song = Song.new(song_params_updated)
     respond_to do |format|
       if @song.save
         format.html { redirect_to @song, notice: 'Song was successfully created.' }
@@ -56,7 +69,7 @@ class SongsController < ApplicationController
   # PATCH/PUT /songs/1.json
   def update
     respond_to do |format|
-      if @song.update(song_params)
+      if @song.update(song_params_updated)
         format.html { redirect_to @song, notice: 'Song was successfully updated.' }
         format.json { render :show, status: :ok, location: @song }
       else
@@ -84,6 +97,6 @@ class SongsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def song_params
-      params.require(:song).permit(:title, :text, :author, :book_id, :term)
+      params.require(:song).permit(:title, :text, :author, :term)
     end
 end
