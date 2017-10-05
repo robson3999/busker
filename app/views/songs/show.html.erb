@@ -13,7 +13,7 @@
   <%= link_to 'Delete', @song, method: :delete, data: { confirm: 'Are you sure you wanna delete '+ @song.title + ' ?' }, :class => "btn btn-sm btn-default" %>
   <% else %>
   <%= link_to 'Back', songs_path, :class => "btn btn-sm btn-default" %>
-  <% end %>
+<% end %>
   <button type="button" onclick="smallestFont()" id="smallestFont" class="btn btn-sm btn-default">A</button>
   <button type="button" onclick="mediumFont()" id="mediumFont" class="btn btn-sm btn-default">A</button>
   <button type="button" onclick="largeFont()" id="largeFont" class="btn btn-sm btn-default">A</button>
