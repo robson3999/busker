@@ -1,6 +1,6 @@
 <% provide :page_title, "Home" %>
 
-<div class="row">
+<div class="col-xs-12">
   <div class="text-center heading">
     <h1 class="text-center">Welcome to Busker!</h1>
     <p>Find songs, save into collections and sing!</p>
@@ -9,7 +9,7 @@
 <h2>Newest songs:</h2>
 </div>
 
-<div class="row">
+<div class="col-xs-12">
     <% @songs.each do |song| %>
         <h3><%= link_to "#{song.title}", song %></h3>
         <p>Author: <%= song.author %>
