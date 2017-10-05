@@ -29,6 +29,13 @@ class BooksController < ApplicationController
   def edit
   end
 
+  # GET /books/1/topdf.pdf
+  def export_to_pdf
+    book = Book.find(params[:id])
+    @songs = book.songs
+
+  end
+
   # POST /books
   # POST /books.json
   def create
