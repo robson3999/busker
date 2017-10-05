@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   def author
     @author = Author.find_by_id(params[:id])
     author_id = @author.id
-    @songs = Song.where("author_id LIKE '?'", author_id)
+    @songs = @author.songs
   end
 
   def authors
