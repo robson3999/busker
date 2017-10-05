@@ -16,10 +16,10 @@ This is a prototype app to maintain songs and songbooks. Created to simplify sea
 
 ## Future features
 
-* validation at adding and updating songs,
+* validation at adding and updating songs, [x]
 * beautiful layout,
-* different font sizes (chosen by user),
-* improved song.text input (TinyMCE probably or sth like that),
+* different font sizes for song display (chosen by user), [x]
+* improved song.text input (~~TinyMCE probably or sth like that~~ CKEditor5), [x]
 * improved chords display (dunno how-to yet),
 * "print songbook" option - to generate complete songbook in .pdf format
 * write tests,
