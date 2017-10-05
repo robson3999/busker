@@ -17,8 +17,10 @@
   <section id="portfolio">
     <div class="container">
       <div class="notifications">
+      <% if notice || alert %>
         <p class="notice"><%= notice %></p>
         <p class="alert"><%= alert %></p>
+        <% end %>
       </div>
       <%= yield %>
     </div>

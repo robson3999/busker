@@ -10,8 +10,9 @@ This is a prototype app to maintain songs and songbooks. Created to simplify sea
 * user authentication:
 	* user can create his songbook (which only him can see),
 	* user can add songs to it (songs are from database availible to everyone),
-	* guest can register new account at /sign_up
-* search - user can search for songs
+	* guest can register new account at /sign_up,
+* search - user can search for songs,
+* service is mobile-friendly,
 
 ## Future features
 
@@ -27,8 +28,8 @@ This is a prototype app to maintain songs and songbooks. Created to simplify sea
 ## To fix
 - [x] user can add multiple times same song to his songbook,
 - [x] user can't remove songs from his songbook without deleting them from main DB,
-- [ ] anybody can create blank song object - needed validation,
+- [x] anybody can create blank song object - needed validation,
 - [ ] search field is case sensitive (should be insensitive - maybe regexp?),
-- [ ] all users can do all CRUD operations - maybe some mods and admins?,
+- [x] all users can do all CRUD operations,
 - [x] duplicated notice/alert messages,
-- [ ] some issues with layout on different browsers,
+- [x] some issues with layout on different browsers,

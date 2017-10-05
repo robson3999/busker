@@ -22,7 +22,7 @@
   </div>
 
 
-  <div class="col-md-12">
+  <div class="col-xs-12">
   <% @songs.each do |song| %>
     <h3><%= link_to "#{song.title}", song %>
     <% if current_user && !Song.is_already_added?(@not_added_songs, song.id) && session[:book_id] %>
