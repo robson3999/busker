@@ -11,9 +11,9 @@ class SongsController < ApplicationController
     	@not_added_songs = all_songs - added_songs
     end
     if params[:term]
-      @songs = Song.search(params[:term])
+      @songs = Song.search(params[:term]).paginate(:page => params[:page], :per_page => 5)
     else
-      @songs = Song.all
+      @songs = Song.all.paginate(:page => params[:page], :per_page => 5)
     end
     if params[:add_song_to_book].present? && session[:book_id].present?
         @book.songs << Song.find(params[:add_song_to_book])

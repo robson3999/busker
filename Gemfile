@@ -35,6 +35,9 @@ gem 'devise'
 # generating pdfs:
 gem 'pdfkit'
 gem 'wkhtmltopdf-binary'
+# pagination
+gem 'will_paginate', '~> 3.1.0'
+gem 'will_paginate-bootstrap'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
