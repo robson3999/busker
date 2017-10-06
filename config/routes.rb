@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   devise_for :users
   root 'application#index'
   get '/about' => 'application#about'
-  get '/authors' => 'application#authors'
-  get '/author/:id' => 'application#author', as: 'author'
+  get '/authors' => 'authors#authors'
+  get '/author/:id' => 'authors#author', as: 'author'
   get '/books/:id/export_to_pdf' => 'books#export_to_pdf', as: 'export_to_pdf'
   resources :books
   resources :songs

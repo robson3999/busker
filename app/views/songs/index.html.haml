@@ -5,7 +5,7 @@
   %br/
   = form_tag(songs_path, method: :get, class: "form-inline search-field") do
     .form-group
-      = text_field_tag :term, params[:term], :class => "form-control"
+      = text_field_tag :term, params[:term], placeholder: "Search songs", :class => "form-control"
       = submit_tag 'Search', class: "btn btn-sm"
 .col-xs-12
   - if current_user.try(:admin?)
