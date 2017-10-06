@@ -6,7 +6,11 @@ class Song < ApplicationRecord
 
   def self.search(term)
     if term
-      where('title LIKE ?', "%#{term}%")
+      songs = Song.arel_table
+      #authors = Author.arel_table
+      Song.where(songs[:title].matches("%#{term}%"))
+      #Author.where(authors[:name].matches("%#{term}%"))
+      #where('title LIKE ?', "%#{term}%")
     else
       all
     end
