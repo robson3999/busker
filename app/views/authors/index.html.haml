@@ -1,0 +1,20 @@
+- provide :page_title, "Authors"
+.col-xs-12.col-lg-6
+  %h1 Authors
+.col-xs-12.col-lg-6
+  %br/
+  = form_tag authors_path, method: :get, class: "form-inline search-field" do
+    .form-group
+      = text_field_tag(:term, params[:term], placeholder: "Search authors",
+        class: "form-control")
+      = submit_tag 'Search', class: "btn btn-sm"
+.col-xs-12
+  = link_to 'View songs', songs_path, :class => "btn btn-sm btn-info"
+  %hr/
+
+.col-xs-12
+  - @authors.each do |author|
+    %h4
+      = link_to author.name, author
+.col-xs-12.text-center
+  = will_paginate @authors, renderer: BootstrapPagination::Rails
