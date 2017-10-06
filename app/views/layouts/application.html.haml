@@ -1,0 +1,28 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title
+      = yield :page_title
+      | Busker
+    = csrf_meta_tags
+    %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1", :name => "viewport"}/
+    / Custom fonts for this template
+    %link{:href => "https://fonts.googleapis.com/css?family=Montserrat:400,700", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic", :rel => "stylesheet", :type => "text/css"}/
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    %script{:src => "https://cdn.ckeditor.com/ckeditor5/1.0.0-alpha.1/classic/ckeditor.js"}
+  %body#page-top
+    = render 'layouts/navbar'
+    %section#portfolio
+      .container
+        .notifications
+          - if notice || alert
+            %p.notice= notice
+            %p.alert= alert
+        = yield
+    / Scroll to Top Button (Only visible on small and extra-small screen sizes)
+    .scroll-top.page-scroll.hidden-sm.hidden-xs.hidden-lg.hidden-md
+      %a.btn.btn-primary{:href => "#page-top"}
+        %i.fa.fa-chevron-up

@@ -1,0 +1,8 @@
+- provide :page_title, "Authors"
+.col-xs-12
+  %h2 Authors
+  %hr/
+.col-xs-12
+  - @authors.each do |author|
+    %h4
+      = link_to author.name, author

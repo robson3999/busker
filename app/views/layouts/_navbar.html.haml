@@ -1,0 +1,34 @@
+%nav#mainNav.navbar.navbar-default.navbar-fixed-top.navbar-custom
+  .container
+    / Brand and toggle get grouped for better mobile display
+    .navbar-header.page-scroll
+      %button.navbar-toggle{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        Menu
+        %i.fa.fa-bars
+      = link_to 'Busker 🎸', root_path, :class => "navbar-brand js-scroll-trigger"
+      / <a class="navbar-brand" href="#page-top">Start Bootstrap</a>
+    / Collect the nav links, forms, and other content for toggling
+    #bs-example-navbar-collapse-1.collapse.navbar-collapse
+      %ul.nav.navbar-nav.navbar-right
+        %li.hidden
+          %a{:href => "#page-top"}
+        %li.page-scroll
+          = link_to 'Songs', songs_path, :class => "nav-link js-scroll-trigger"
+          / <a href="#portfolio">Portfolio</a>
+        - if current_user
+          %li.page-scroll
+            = link_to 'Songbooks', books_path, :class => "nav-link js-scroll-trigger"
+          %li.page-scroll
+            = link_to "About", about_path, :class => "nav-link js-scroll-trigger"
+          %li.page-scroll
+            = link_to "Logout", destroy_user_session_path, :method => "delete", :class => "nav-link js-scroll-trigger"
+        - else
+          %li.disabled
+            = link_to 'Songbooks', "#", :class => "nav-link js-scroll-trigger", :id => "chordbook"
+          %li.page-scroll
+            = link_to "About", about_path, :class => "nav-link js-scroll-trigger"
+          %li.page-scroll
+            = link_to "Sing in", new_user_session_path, :class => "nav-link js-scroll-trigger"
+    / /.navbar-collapse
+  / /.container-fluid

@@ -1,0 +1,28 @@
+- provide :page_title, "Songs"
+.col-lg-6.col-xs-12
+  %h1 Songs
+.col-lg-6.col-xs-12
+  %br/
+  = form_tag(songs_path, method: :get, class: "form-inline search-field") do
+    .form-group
+      = text_field_tag :term, params[:term], :class => "form-control"
+      = submit_tag 'Search', class: "btn btn-sm"
+.col-xs-12
+  - if current_user.try(:admin?)
+    = link_to 'Add new Song', new_song_path, :class => "btn btn-sm btn-info"
+  = link_to 'View authors', authors_path, :class => "btn btn-sm btn-info"
+  - if session[:book_id]
+    = link_to "#{@book.title}", book_path(:id => session[:book_id]), :class => "btn btn-sm btn-default"
+  %hr/
+.col-xs-12
+  - @songs.each do |song|
+    %h3
+      = link_to "#{song.title}", song
+      - if current_user && !Song.is_already_added?(@not_added_songs, song.id) && session[:book_id]
+        = link_to "To my songbook!", songs_path(:add_song_to_book => song.id), :class => "btn btn-sm btn-info"
+    %p
+      Author: #{link_to "#{song.author.name}", author_path(song.author.id), :class => "author-link"}
+  .col-xs-12.text-center
+    = will_paginate @songs, renderer: BootstrapPagination::Rails
+  %hr/
+%br/

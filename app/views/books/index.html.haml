@@ -1,0 +1,9 @@
+- provide :page_title, "Songbooks"
+.col-md-12
+  %h1 Songbooks
+  = link_to 'New Book', new_book_path, :class => "btn btn-sm btn-info"
+  %hr/
+- @books.each do |book|
+  .col-md-12
+    %h2= link_to "#{book.title}", book
+    %h4= book.description

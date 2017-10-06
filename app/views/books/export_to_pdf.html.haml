@@ -1,0 +1,9 @@
+- @songs.each do |song|
+  .col-xs-6
+    - if simple_format(song.text).length < 1000
+      - #some split action, but dunno how yet
+    %p#song-title
+      %b
+        = song.title
+    %p#song-text
+      = simple_format(song.text)
