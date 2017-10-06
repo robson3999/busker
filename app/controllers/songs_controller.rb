@@ -83,6 +83,11 @@ class SongsController < ApplicationController
   # DELETE /songs/1.json
   def destroy
     @song.destroy
+    # remove blank authors
+    if @song.author.songs.empty?
+      @song.author.destroy
+    end
+
     respond_to do |format|
       format.html { redirect_to songs_url, notice: 'Song was successfully destroyed.' }
       format.json { head :no_content }
