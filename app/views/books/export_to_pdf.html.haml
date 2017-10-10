@@ -1,9 +1,15 @@
+- provide :page_title, 'Songbook export'
+#busker-app
+  %h2 Busker 🎸
+.col-xs-12.text-right
+  %button{ :onclick=>"printBook()", :class => "btn btn-sm btn-primary", :id => "print-book-btn" } Print
+
 - @songs.each do |song|
-  .col-xs-6
-    - if simple_format(song.text).length < 1000
-      - #some split action, but dunno how yet
-    %p#song-title
+  .col-xs-12#song-text-area-print
+    %p
       %b
         = song.title
-    %p#song-text
-      = simple_format(song.text)
+    %p
+      = simple_format song.text
+    %hr
+    %br

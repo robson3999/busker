@@ -37,13 +37,25 @@ p{
   color: #2C3E50;
 }
 
+#song-text-area-print{
+  -moz-column-count: auto;
+  -webkit-column-count: auto;
+  column-count: auto;
+  column-width: 300px;
+  font-size: 13px;
+}
+#busker-app{
+  display: none;
+}
 @media print {
-  #header, #footer, #nav { display: none !important; }
-  #song-text-area{
-    -moz-column-count: auto;
-    -webkit-column-count: auto;
-    column-count: auto;
-    column-width: 300px;
-    font-size: 16px;
+ #print-book-btn{
+   display: none;
+ }
+  #busker-app{
+    display: inline;
+    position: absolute;
+    top: 0;
+    left:0;
   }
+
 }
