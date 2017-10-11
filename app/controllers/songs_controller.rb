@@ -1,5 +1,5 @@
 class SongsController < ApplicationController
-  before_action :set_song, only: [:show, :edit, :update, :destroy]
+  before_action :set_song, only: [:show, :edit, :update, :destroy, :publish, :unpublish]
 
   # GET /songs
   # GET /songs.json
@@ -7,13 +7,13 @@ class SongsController < ApplicationController
     @book = Book.find_by_id(session[:book_id])
     if @book != nil
       added_songs = @book.songs
-    	all_songs = Song.all
-    	@not_added_songs = all_songs - added_songs
+    	@not_added_songs = all_songs - Song.all
     end
+
     if params[:term]
-      @songs = Song.search(params[:term]).paginate(:page => params[:page], :per_page => 5)
+      @songs = Song.search(params[:term]).published.paginate(:page => params[:page], :per_page => 5)
     else
-      @songs = Song.all.paginate(:page => params[:page], :per_page => 5)
+      @songs = Song.published.paginate(:page => params[:page], :per_page => 5)
     end
     if params[:add_song_to_book].present? && session[:book_id].present?
         @book.songs << Song.find(params[:add_song_to_book])
@@ -21,6 +21,23 @@ class SongsController < ApplicationController
     end
   end
 
+  def user_songs
+    if current_user.try(:admin?)
+      @songs = Song.all
+    else
+      @songs = Song.where(user_id: current_user.id)
+    end
+  end
+
+  def publish
+    @song.publish
+    redirect_to user_songs_url
+  end
+
+  def unpublish
+    @song.unpublish
+    redirect_to user_songs_url
+  end
 
   # GET /songs/1
   # GET /songs/1.json
@@ -32,10 +49,12 @@ class SongsController < ApplicationController
   # GET /songs/new
   def new
     @song = Song.new
+    @user_id = current_user.id
   end
 
   # GET /songs/1/edit
   def edit
+    @user_id = current_user.id
   end
 
   # Update params[:author] before creating/updating song
@@ -102,6 +121,6 @@ class SongsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def song_params
-      params.require(:song).permit(:title, :text, :author, :term)
+      params.require(:song).permit(:title, :text, :author, :user_id, :term)
     end
 end

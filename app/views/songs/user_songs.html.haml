@@ -1,0 +1,14 @@
+- if current_user.try(:admin?)
+  %h1 All songs
+- else
+  %h1 Your songs
+
+.col-xs-12
+  - @songs.each do |song|
+    %h3
+      = link_to "#{song.title}", song
+      - if current_user.try(:admin?)
+        - if !song.published?
+          = link_to "Publish", publish_song_path(song), method: :put, :class => "btn btn-sm btn-default"
+        - else
+          = link_to "Unpublish", unpublish_song_path(song), method: :put, :class => "btn btn-sm btn-default"

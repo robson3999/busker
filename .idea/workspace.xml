@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aadfcdad-04f6-4d83-8c8e-18433a61e683" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/custom.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/custom.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/custom.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/custom.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/authors/index.html.haml" afterPath="$PROJECT_DIR$/app/views/authors/index.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/books/export_to_pdf.html.haml" afterPath="$PROJECT_DIR$/app/views/books/export_to_pdf.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/books/index.html.haml" afterPath="$PROJECT_DIR$/app/views/books/index.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/books/show.html.haml" afterPath="$PROJECT_DIR$/app/views/books/show.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/songs/index.html.haml" afterPath="$PROJECT_DIR$/app/views/songs/index.html.haml" />
-    </list>
+    <list default="true" id="aadfcdad-04f6-4d83-8c8e-18433a61e683" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
     <ignored path="$PROJECT_DIR$/public/system/" />
@@ -324,12 +316,12 @@
       <option name="presentableId" value="Default" />
       <updated>1507576945524</updated>
       <workItem from="1507576948736" duration="773000" />
-      <workItem from="1507619893000" duration="2818000" />
+      <workItem from="1507619893000" duration="3811000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3591000" />
+    <option name="totallyTimeSpent" value="4584000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="266" y="27" width="1920" height="1054" extended-state="6" />

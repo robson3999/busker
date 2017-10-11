@@ -4,7 +4,7 @@
 %p
   %strong Author:
   = link_to "#{@song.author.name}", author_path(@song.author.id), :class => "author-link"
-- if current_user.try(:admin?)
+- if @song.user_id == current_user.id || current_user.try(:admin?)
   = link_to 'Edit', edit_song_path(@song), :class => "btn btn-sm btn-default"
   = link_to 'Back', songs_path, :class => "btn btn-sm btn-default"
   = link_to 'Delete', @song, method: :delete, data: { confirm: 'Are you sure you wanna delete '+ @song.title + ' ?' }, :class => "btn btn-sm btn-default"

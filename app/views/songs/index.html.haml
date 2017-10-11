@@ -8,8 +8,9 @@
       = text_field_tag :term, params[:term], placeholder: "Search songs", :class => "form-control"
       = submit_tag 'Search', class: "btn btn-sm"
 .col-xs-12
-  - if current_user.try(:admin?)
+  - if current_user
     = link_to 'Add new Song', new_song_path, :class => "btn btn-sm btn-primary"
+    = link_to "Your songs", user_songs_path, :class => "btn btn-sm btn-default"
   = link_to 'View authors', authors_path, :class => "btn btn-sm btn-primary"
   - if session[:book_id]
     = link_to "#{@book.title}", book_path(:id => session[:book_id]), :class => "btn btn-sm btn-default"

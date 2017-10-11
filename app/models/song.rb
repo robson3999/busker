@@ -4,6 +4,8 @@ class Song < ApplicationRecord
   validates :title, length: {maximum: 45 }
   validates :title, :author_id, presence: true
 
+  scope :published, -> { where(published: true) }
+
   def self.search(term)
     if term
       songs = Song.arel_table
@@ -24,6 +26,14 @@ class Song < ApplicationRecord
         end
       end
     end
+  end
+
+  def publish
+    update(published: true)
+  end
+
+  def unpublish
+    update(published: false)
   end
 
 end
