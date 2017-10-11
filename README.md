@@ -21,15 +21,6 @@ This is a prototype app to maintain songs and songbooks. Created to simplify sea
 * different font sizes for song display (chosen by user), [x]
 * improved song.text input (~~TinyMCE probably or sth like that~~ CKEditor5), [x]
 * improved chords display (dunno how-to yet),
-* "print songbook" option - to generate complete songbook in .pdf format
+* "print songbook" option - to generate complete songbook in .pdf format [x]
 * write tests,
-* write layout using HAML instead of .erb
-
-## To fix
-- [x] user can add multiple times same song to his songbook,
-- [x] user can't remove songs from his songbook without deleting them from main DB,
-- [x] anybody can create blank song object - needed validation,
-- [ ] search field is case sensitive (should be insensitive - maybe regexp?),
-- [x] all users can do all CRUD operations,
-- [x] duplicated notice/alert messages,
-- [x] some issues with layout on different browsers,
+* write layout using HAML instead of .erb [x]
