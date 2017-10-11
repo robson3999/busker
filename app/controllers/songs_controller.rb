@@ -7,7 +7,7 @@ class SongsController < ApplicationController
     @book = Book.find_by_id(session[:book_id])
     if @book != nil
       added_songs = @book.songs
-    	@not_added_songs = all_songs - Song.all
+    	@not_added_songs = Song.all - added_songs
     end
 
     if params[:term]
