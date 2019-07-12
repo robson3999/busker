@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Author < ApplicationRecord
   has_many :songs
 
@@ -9,5 +11,4 @@ class Author < ApplicationRecord
       all
     end
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddPublishedToPosts < ActiveRecord::Migration[5.1]
   def change
     change_table :songs do |t|
