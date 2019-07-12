@@ -1,19 +1,19 @@
-- provide :page_title, @book.title
+- provide :page_title, book.title
 .col-xs-12
   %p
   %h1
-    = @book.title
+    = book.title
   %h4
-    = @book.description
+    = book.description
   = link_to "Add songs", songs_path , :class => "btn btn-sm btn-primary"
-  = link_to 'Delete', @book, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-sm btn-danger"
-  = link_to 'Edit', edit_book_path(@book), :class => "btn btn-sm btn-default"
-  = link_to 'Export to print', export_to_pdf_path(@book), :class => "btn btn-sm btn-default"
+  = link_to 'Delete', book, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-sm btn-danger"
+  = link_to 'Edit', edit_book_path(book), :class => "btn btn-sm btn-default"
+  = link_to 'Export to print', export_to_pdf_path(book), :class => "btn btn-sm btn-default"
   = link_to 'Back', books_path, :class => "btn btn-sm btn-default"
   %hr/
 .col-xs-12
   %h3 Songs in that songbook:
-  - @book.songs.reverse.each do |song|
+  - book.songs.reverse.each do |song|
     .col-xs-12
       %h4
         = link_to song.title, song

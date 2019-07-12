@@ -1,13 +1,13 @@
-- provide :page_title, @author.name
+- provide :page_title, author.name
 .col-xs-12
   %h1
-    = @author.name
+    = author.name
   = link_to "Back", authors_path, :class => "btn btn-sm btn-default"
   %hr/
 .col-xs-12
-  - @songs.each do |song|
+  - songs.each do |song|
     %h4
       = link_to song.title, song
     %br/
 .col-xs-12.text-center
-  = will_paginate @songs, renderer: BootstrapPagination::Rails
+  = will_paginate songs, renderer: BootstrapPagination::Rails
