@@ -1,32 +1,34 @@
+# frozen_string_literal: true
+
 class SongsController < ApplicationController
-  before_action :set_song, only: [:show, :edit, :update, :destroy, :publish, :unpublish]
+  before_action :set_song, only: %i[show edit update destroy publish unpublish]
 
   # GET /songs
   # GET /songs.json
   def index
     @book = Book.find_by_id(session[:book_id])
-    if @book != nil
+    unless @book.nil?
       added_songs = @book.songs
-    	@not_added_songs = Song.all - added_songs
+      @not_added_songs = Song.all - added_songs
     end
 
-    if params[:term]
-      @songs = Song.search(params[:term]).published.paginate(:page => params[:page], :per_page => 5)
-    else
-      @songs = Song.published.paginate(:page => params[:page], :per_page => 5)
-    end
+    @songs = if params[:term]
+               Song.search(params[:term]).published.paginate(page: params[:page], per_page: 5)
+             else
+               Song.published.paginate(page: params[:page], per_page: 5)
+             end
     if params[:add_song_to_book].present? && session[:book_id].present?
-        @book.songs << Song.find(params[:add_song_to_book])
-        redirect_to "/songs"
+      @book.songs << Song.find(params[:add_song_to_book])
+      redirect_to '/songs'
     end
   end
 
   def user_songs
-    if current_user.try(:admin?)
-      @songs = Song.all
-    else
-      @songs = Song.where(user_id: current_user.id)
-    end
+    @songs = if current_user.try(:admin?)
+               Song.all
+             else
+               Song.where(user_id: current_user.id)
+             end
   end
 
   def publish
@@ -60,10 +62,10 @@ class SongsController < ApplicationController
   # Update params[:author] before creating/updating song
   def song_params_updated
     song_params_updated = {}
-    if Author.exists?(:name => song_params[:author])
+    if Author.exists?(name: song_params[:author])
       song_params_updated[:author] = Author.find_by_name(song_params[:author])
     else
-      Author.create(:name => song_params[:author])
+      Author.create(name: song_params[:author])
       song_params_updated[:author] = Author.last
     end
     song_params.merge(song_params_updated)
@@ -103,9 +105,7 @@ class SongsController < ApplicationController
   def destroy
     @song.destroy
     # remove blank authors
-    if @song.author.songs.empty?
-      @song.author.destroy
-    end
+    @song.author.destroy if @song.author.songs.empty?
 
     respond_to do |format|
       format.html { redirect_to songs_url, notice: 'Song was successfully destroyed.' }
@@ -114,13 +114,14 @@ class SongsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_song
-      @song = Song.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def song_params
-      params.require(:song).permit(:title, :text, :author, :user_id, :term)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_song
+    @song = Song.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def song_params
+    params.require(:song).permit(:title, :text, :author, :user_id, :term)
+  end
 end
