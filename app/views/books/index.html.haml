@@ -3,7 +3,7 @@
   %h1 Songbooks
   = link_to 'New Book', new_book_path, :class => "btn btn-sm btn-primary"
   %hr/
-- @books.each do |book|
+- books.each do |book|
   .col-md-12
     %h2= link_to "#{book.title}", book
     %h4= book.description

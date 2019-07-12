@@ -1,19 +1,10 @@
 # frozen_string_literal: true
 
 class BooksController < ApplicationController
-  before_action :set_book, only: %i[show edit update destroy]
+  expose :books, -> { Book.where("user_id = '?'", current_user&.id) }
+  expose :book
 
-  # GET /books
-  # GET /books.json
-  def index
-    user_id = current_user.id if current_user
-    @books = Book.where("user_id = '?'", user_id)
-  end
-
-  # GET /books/1
-  # GET /books/1.json
   def show
-    @book = Book.find(params[:id])
     session[:book_id] = params[:id]
 
     if params[:remove_song_from_book].present?
@@ -22,52 +13,26 @@ class BooksController < ApplicationController
     end
   end
 
-  # GET /books/new
-  def new
-    @book = Book.new
-  end
-
-  # GET /books/1/edit
-  def edit; end
-
-  # GET /books/1/topdf.pdf
   def export_to_pdf
     book = Book.find(params[:id])
     @songs = book.songs
   end
 
-  # POST /books
-  # POST /books.json
   def create
-    @book = Book.new(book_params)
-    @book.user_id = current_user.id if current_user
-    respond_to do |format|
-      if @book.save
-        format.html { redirect_to @book, notice: 'Book was successfully created.' }
-        format.json { render :show, status: :created, location: @book }
-      else
-        format.html { render :new }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
-      end
+    book.user_id = current_user.id if current_user
+    if book.save
+      redirect_to book, notice: 'Book was successfully created.'
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /books/1
-  # PATCH/PUT /books/1.json
   def update
-    respond_to do |format|
-      if @book.update(book_params)
-        format.html { redirect_to @book, notice: 'Book was successfully updated.' }
-        format.json { render :show, status: :ok, location: @book }
-      else
-        format.html { render :edit }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
-      end
-    end
+    return render :edit unless book.update(book_params)
+
+    redirect_to book, notice: 'Book was successfully updated.'
   end
 
-  # DELETE /books/1
-  # DELETE /books/1.json
   def destroy
     session[:book_id] = nil
     @book.destroy
@@ -79,12 +44,6 @@ class BooksController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_book
-    @book = Book.find(params[:id])
-  end
-
-  # Never trust parameters from the scary internet, only allow the white list through.
   def book_params
     params.require(:book).permit(:title, :description)
   end

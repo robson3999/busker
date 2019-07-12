@@ -7,7 +7,7 @@
   %h2
     Newest #{link_to "songs", songs_path, :id => "songs-link"}:
 .col-xs-12
-  - @songs.each do |song|
+  - songs.each do |song|
     %h3= link_to "#{song.title}", song
     %p
       Author: #{link_to "#{song.author.name}", author_path(song.author.id), :class => "author-link"}

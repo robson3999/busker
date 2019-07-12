@@ -13,8 +13,8 @@
   %hr/
 
 .col-xs-12
-  - @authors.each do |author|
+  - authors.each do |author|
     %h4
       = link_to author.name, author
 .col-xs-12.text-center
-  = will_paginate @authors, renderer: BootstrapPagination::Rails
+  = will_paginate authors, renderer: BootstrapPagination::Rails
