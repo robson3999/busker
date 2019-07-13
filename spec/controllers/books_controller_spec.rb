@@ -26,7 +26,7 @@ RSpec.describe BooksController, type: :controller do
 
         expect(response).to have_http_status(:redirect)
       end
-      
+
       it 'redirects to root path' do
         book = create(:book)
         get :show, params: { id: book.id }

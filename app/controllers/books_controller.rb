@@ -13,9 +13,7 @@ class BooksController < ApplicationController
     session[:book_id] = params[:id]
 
     # TODO: move to separate method
-    if params[:remove_song_from_book].present?
-      book.songs.destroy(params[:remove_song_from_book])
-    end
+    book.songs.destroy(params[:remove_song_from_book]) if params[:remove_song_from_book].present?
   end
 
   def export_to_pdf

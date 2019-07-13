@@ -23,9 +23,9 @@ class Song < ApplicationRecord
     end
   end
 
-  def self.is_already_added?(not_added_songs, song_id)
+  def already_added?(not_added_songs)
     not_added_songs&.each do |song|
-      return false if song.id == song_id
+      return false if song.id == id
     end
   end
 

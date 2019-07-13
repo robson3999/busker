@@ -19,7 +19,7 @@
   - songs.each do |song|
     %h3
       = link_to "#{song.title}", song
-      - if current_user && !Song.is_already_added?(@not_added_songs, song.id) && session[:book_id]
+      - if current_user && !song.already_added?(@not_added_songs) && session[:book_id]
         = link_to "To my songbook!", songs_path(:add_song_to_book => song.id), :class => "btn btn-sm btn-primary"
     %p
       Author: #{link_to "#{song.author.name}", author_path(song.author.id), :class => "author-link"}
