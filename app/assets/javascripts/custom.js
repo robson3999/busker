@@ -13,17 +13,3 @@ function mediumFont() {
 function largeFont() {
   document.getElementById("song-text-area").style.fontSize = "20px";
 };
-
-
-
-document.addEventListener("turbolinks:load", function() {
-  ClassicEditor.editorConfig = function( config ) {
-    config.language = 'en';
-    config.height = '250px';
-  };
-
-  ClassicEditor.create(document.querySelector('#song_body'), {
-    toolbar: ['bold', 'italic']
-  })
-  .catch( error => {} )
-});
