@@ -1,6 +1,6 @@
 = simple_form_for(song) do |f|
   = f.input :title
-  = f.input :body
+  = f.input :body, as: :trix_editor
   = f.input :author, input_html: { value: author_from_db(f.object) }
   .form-group
     = f.button :submit, class: 'btn btn-primary'
