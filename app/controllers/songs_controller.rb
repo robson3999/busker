@@ -44,18 +44,19 @@ class SongsController < ApplicationController
   end
 
   def song_params_updated
-    song_params_updated = {}
-    if Author.exists?(name: song_params[:author])
-      song_params_updated[:author] = Author.find_by_name(song_params[:author])
+    author_params = {}
+    author = Author.find_by(name: song_params[:author])
+    if author
+      author_params[:author_id] = author.id
     else
-      Author.create(name: song_params[:author])
-      song_params_updated[:author] = Author.last
+      song_author = Author.create(name: song_params[:author])
+      author_params[:author_id] = song_author.id
     end
-    song_params.merge(song_params_updated)
+    song_params.merge(author_params).except(:author)
   end
 
   def create
-    song = Song.new(song_params_updated)
+    song = current_user.songs.build(song_params_updated)
     if song.save
       redirect_to song, notice: I18n.t('songs.actions.create.success')
     else

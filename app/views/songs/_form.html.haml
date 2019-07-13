@@ -1,22 +1,6 @@
-= form_with(model: song, local: true) do |form|
-  - if song.errors.any?
-    #error_explanation
-      %h4
-        = pluralize(song.errors.count, "error")
-        prohibited this song from being saved:
-      %ul
-        - song.errors.full_messages.each do |message|
-          %li= message
+= simple_form_for(song) do |f|
+  = f.input :title
+  = f.input :body
+  = f.input :author, input_html: { value: author_from_db(f.object) }
   .form-group
-    = form.label :title
-    = form.text_field :title, id: :song_title, :class => "form-control"
-  .form-group
-    = form.label :text
-    = form.text_area :body, id: :song_text, :class => "form-control", :rows => 8
-  .form-group
-    = form.label :author
-    = form.text_field :author, id: :song_author, :class => "form-control"
-  = form.text_field :user_id, id: :song_user_id, :value => @user_id, :type => 'hidden'
-
-  .form-group
-    = form.submit
+    = f.button :submit, class: 'btn btn-primary'
