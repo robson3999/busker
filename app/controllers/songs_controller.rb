@@ -1,26 +1,20 @@
 # frozen_string_literal: true
 
 class SongsController < ApplicationController
-  before_action :set_song, only: %i[show edit update destroy publish unpublish]
+  expose :song
+  expose :songs, -> { songs_from_params }
+  expose :book, -> { Book.find_by(id: session[:book_id]) }
 
-  # GET /songs
-  # GET /songs.json
   def index
-    @book = Book.find_by_id(session[:book_id])
-    unless @book.nil?
-      added_songs = @book.songs
+    unless book.nil?
+      added_songs = book.songs
       @not_added_songs = Song.all - added_songs
     end
 
-    @songs = if params[:term]
-               Song.search(params[:term]).published.paginate(page: params[:page], per_page: 5)
-             else
-               Song.published.paginate(page: params[:page], per_page: 5)
-             end
-    if params[:add_song_to_book].present? && session[:book_id].present?
-      @book.songs << Song.find(params[:add_song_to_book])
-      redirect_to '/songs'
-    end
+    return unless params[:add_song_to_book].present? && session[:book_id].present?
+
+    book.songs << Song.find(params[:add_song_to_book])
+    redirect_to songs_path
   end
 
   def user_songs
@@ -32,96 +26,70 @@ class SongsController < ApplicationController
   end
 
   def publish
-    @song.publish
+    song.publish
     redirect_to user_songs_url
   end
 
   def unpublish
-    @song.unpublish
+    song.unpublish
     redirect_to user_songs_url
   end
 
-  # GET /songs/1
-  # GET /songs/1.json
-  def show
-    @song = Song.find(params[:id])
-    @author = @song.author
-  end
-
-  # GET /songs/new
   def new
-    @song = Song.new
     @user_id = current_user.id
   end
 
-  # GET /songs/1/edit
   def edit
     @user_id = current_user.id
   end
 
-  # Update params[:author] before creating/updating song
   def song_params_updated
-    song_params_updated = {}
-    if Author.exists?(name: song_params[:author])
-      song_params_updated[:author] = Author.find_by_name(song_params[:author])
+    author_params = {}
+    author = Author.find_by(name: song_params[:author])
+    if author
+      author_params[:author_id] = author.id
     else
-      Author.create(name: song_params[:author])
-      song_params_updated[:author] = Author.last
+      song_author = Author.create(name: song_params[:author])
+      author_params[:author_id] = song_author.id
     end
-    song_params.merge(song_params_updated)
+    song_params.merge(author_params).except(:author)
   end
 
-  # POST /songs
-  # POST /songs.json
   def create
-    @song = Song.new(song_params_updated)
-    respond_to do |format|
-      if @song.save
-        format.html { redirect_to @song, notice: 'Song was successfully created.' }
-        format.json { render :show, status: :created, location: @song }
-      else
-        format.html { render :new }
-        format.json { render json: @song.errors, status: :unprocessable_entity }
-      end
+    song = current_user.songs.build(song_params_updated)
+    if song.save
+      redirect_to song, notice: I18n.t('songs.actions.create.success')
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /songs/1
-  # PATCH/PUT /songs/1.json
   def update
-    respond_to do |format|
-      if @song.update(song_params_updated)
-        format.html { redirect_to @song, notice: 'Song was successfully updated.' }
-        format.json { render :show, status: :ok, location: @song }
-      else
-        format.html { render :edit }
-        format.json { render json: @song.errors, status: :unprocessable_entity }
-      end
+    if song.update(song_params_updated)
+      redirect_to song, notice: I18n.t('songs.actions.update.success')
+    else
+      render :edit
     end
   end
 
-  # DELETE /songs/1
-  # DELETE /songs/1.json
   def destroy
-    @song.destroy
-    # remove blank authors
-    @song.author.destroy if @song.author.songs.empty?
+    song.destroy
+    song.author.destroy if song.author.songs.empty?
 
-    respond_to do |format|
-      format.html { redirect_to songs_url, notice: 'Song was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to songs_url, notice: I18n.t('songs.actions.destroy.success')
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_song
-    @song = Song.find(params[:id])
+  def songs_from_params
+    if params[:term]
+      Song.search(params[:term]).published.paginate(page: params[:page], per_page: 5)
+    else
+      Song.published.paginate(page: params[:page], per_page: 5)
+    end
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def song_params
-    params.require(:song).permit(:title, :text, :author, :user_id, :term)
+    params.require(:song).permit(:title, :body, :author, :user_id, :term)
   end
 end

@@ -8,7 +8,7 @@ class AuthorsController < ApplicationController
   private
 
   def authors_from_params
-    return Author.search(params[:term]).paginate(page: params[:page], per_page: 5)if params[:term]
+    return Author.search(params[:term]).paginate(page: params[:page], per_page: 5) if params[:term]
 
     Author.all.paginate(page: params[:page], per_page: 5)
   end
