@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 class Song < ApplicationRecord
-  has_and_belongs_to_many :books
+  has_many :book_songs
+  has_many :books, through: :book_songs
+
   belongs_to :author
-  validates :title, length: { maximum: 45 }
+  belongs_to :user
+
   validates :title, :author_id, presence: true
 
   scope :published, -> { where(published: true) }

@@ -13,10 +13,10 @@
     = link_to "Your songs", user_songs_path, :class => "btn btn-sm btn-default"
   = link_to 'View authors', authors_path, :class => "btn btn-sm btn-primary"
   - if session[:book_id]
-    = link_to "#{@book.title}", book_path(:id => session[:book_id]), :class => "btn btn-sm btn-default"
+    = link_to "#{book.title}", book_path(:id => session[:book_id]), :class => "btn btn-sm btn-default"
   %hr/
 .col-xs-12
-  - @songs.each do |song|
+  - songs.each do |song|
     %h3
       = link_to "#{song.title}", song
       - if current_user && !Song.is_already_added?(@not_added_songs, song.id) && session[:book_id]
@@ -24,6 +24,6 @@
     %p
       Author: #{link_to "#{song.author.name}", author_path(song.author.id), :class => "author-link"}
   .col-xs-12.text-center
-    = will_paginate @songs, renderer: BootstrapPagination::Rails
+    = will_paginate songs, renderer: BootstrapPagination::Rails
   %hr/
 %br/

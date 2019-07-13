@@ -14,7 +14,7 @@ AllCops:
 Metrics/LineLength:
   Max: 130
 Metrics/BlockLength:
-  ExcludedMethods: ['describe', 'context', 'task']
+  ExcludedMethods: ['describe', 'context', 'task', 'configure']
 Metrics/AbcSize:
   Max: 22
 Metrics/MethodLength:
