@@ -145,7 +145,7 @@ GEM
     parallel (1.17.0)
     parser (2.6.3.0)
       ast (~> 2.4.0)
-    pdfkit (0.8.4.1)
+    pdfkit (0.8.7.2)
     pg (1.1.4)
     powerpack (0.1.2)
     pry (0.12.2)
